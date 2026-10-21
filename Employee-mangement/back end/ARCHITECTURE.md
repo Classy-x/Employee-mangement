@@ -57,29 +57,9 @@ CREATE TABLE employee (
 | `status` | `VARCHAR(20)` | `NOT NULL`, Default `'Active'` | `'Active'` or `'Inactive'` |
 
 ---
+## 3. Feature Status & Incomplete Items
 
-## 3. Data Flow
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Client as Frontend Client
-    participant API as Express API (:8080)
-    participant DB as PostgreSQL (employee table)
-
-    Client->>API: HTTP Request (GET/POST/PUT/DELETE)
-    API->>API: Parse JSON body & validate input
-    API->>DB: Execute SQL query via pg.Pool
-    DB-->>API: Query results / Rows returned
-    API->>API: Format response payload
-    API-->>Client: JSON response (200 / 201 / 400 / 404 / 500)
-```
-
----
-
-## 4. Feature Status & Incomplete Items
-
-### 4.1 Completed Features
+### 3.1 Completed Features
 - **GET /api/employee**: Retrieves all employees; supports `search` and `status` query parameters.
 - **GET /api/employee/:id**: Retrieves a specific employee by ID; returns 404 if not found.
 - **POST /api/employee**: Creates a new employee; auto-generates ID via `SERIAL`; enforces email uniqueness.
@@ -87,7 +67,7 @@ sequenceDiagram
 - **DELETE /api/employee/:id**: Removes employee by ID.
 - **CORS enabled**: Supports local development across ports.
 
-### 4.2 Incomplete Features & Roadmap
+### 3.2 Incomplete Features & Roadmap
 1. **Authentication & Authorization**: Endpoints are currently public. Role-based access control (e.g. JWT or API keys) can be added.
 2. **Server-Side Pagination**: The API returns all matching records directly. Pagination (`limit` and `offset`) can be re-introduced if dataset grows large.
 3. **Database Migration Tooling**: Schema is managed via raw SQL. A migration tool (Knex, Prisma, or node-pg-migrate) can be adopted for version-controlled migrations.
