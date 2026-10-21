@@ -5,37 +5,7 @@
 
 ---
 
-## 1. System Overview
-
-Decoupled SPA architecture communicating via REST API to an Express.js backend and PostgreSQL database.
-
-```mermaid
-graph TD
-    subgraph Client ["Frontend (Vite + React 19)"]
-        UI["UI Components"]
-        State["App.jsx (State)"]
-        Service["employeeService.js"]
-    end
-
-    subgraph Server ["Backend (Express.js)"]
-        API["/api/employee Router"]
-        Controller["employee.controller.js"]
-    end
-
-    subgraph Database ["PostgreSQL"]
-        DB[("employee Table")]
-    end
-
-    UI --> State
-    State --> Service
-    Service <-->|REST / JSON| API
-    API <--> Controller
-    Controller <--> DB
-```
-
----
-
-## 2. Frontend Structure
+## 1. Frontend Structure
 
 ```
 src/
@@ -69,7 +39,7 @@ src/
 
 ---
 
-## 3. API Contract (`http://localhost:8080/api/employee`)
+## 2. API Contract (`http://localhost:8080/api/employee`)
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -81,7 +51,7 @@ src/
 
 ---
 
-## 4. Implemented Features
+## 3. Implemented Features
 
 - **CRUD:** Complete Add, Edit (pre-fetched via `GET /:id`), Delete with confirmation, and View.
 - **Search & Filters:** Real-time search across Name/Email, status filtering (`All`, `Active`, `Inactive`) with counter badges.
@@ -90,7 +60,7 @@ src/
 
 ---
 
-## 5. Incomplete & Future Features
+## 4. Incomplete & Future Features
 
 - **Server-Side Pagination:** Add `page` and `limit` on API (`LIMIT $1 OFFSET $2`) for large datasets.
 - **Server-Side Search Debounce:** Delegate debounced search to backend `ILIKE` queries when pagination is active.
